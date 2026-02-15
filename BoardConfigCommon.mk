@@ -55,7 +55,7 @@ AUDIO_FEATURE_ENABLED_SVA_MULTI_STAGE := true
 BOARD_SUPPORTS_SOUND_TRIGGER := true
 BOARD_SUPPORTS_OPENSOURCE_STHAL := true
 BOARD_USES_ALSA_AUDIO := true
-TARGET_USES_QCOM_MM_AUDIO := true
+TARGET_USES_QCOM_MM_AUDIO=true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := taro
@@ -82,7 +82,9 @@ $(call soong_config_set,surfaceflinger,udfps_lib,//hardware/oplus:libudfps_exten
 
 # Init
 $(call soong_config_set,vendor_init,library,//$(COMMON_PATH):libinit_oplus)
-
+# UAPI Header Mapping
+TARGET_USES_QCOM_DISPLAY_UAPI_HEADERS := true
+TARGET_USES_AUDIO_UAPI_HEADERS := true
 # DTBO
 BOARD_USES_QCOM_MERGE_DTBS_SCRIPT := true
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
