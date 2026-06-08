@@ -1,0 +1,69 @@
+#
+# Copyright (C) 2022-2025 The LineageOS Project
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+import /odm/etc/init/hw/init.oplus.display.rc
+
+on fs
+    # Update touchpanel firmware in case we ship newer firmware in /odm
+    write /proc/touchpanel/tp_fw_update 0
+
+on early-boot
+    # Radio
+    exec_start oplus-sh
+    setprop persist.radio.multisim.config ${vendor.radio.multisim.config}
+
+    # SSR
+    write /sys/bus/msm_subsys/devices/subsys0/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys1/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys2/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys3/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys4/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys5/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys6/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys7/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys8/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys9/restart_level RELATED
+    write /sys/bus/msm_subsys/devices/subsys10/restart_level RELATED
+
+on boot
+    chmod 0000 /sys/kernel/oplus_display/hbm
+
+on property:ro.boot.prjname=*
+    # Display
+    setprop ro.separate.soft ${ro.boot.prjname}
+
+on property:sys.boot_completed=1
+    # Charging
+    chown system system /dev/oplus_chg
+
+    # Display
+    copy /vendor/etc/Oplus_QC_LTM_SM8450_2021_10_12.pfm /mnt/vendor/persist/data/pfm/licenses/Oplus_QC_LTM_SM8450_2021_10_12.pfm
+    copy /vendor/etc/Oplus_QC_LTM_SM8475_2022_07_05.pfm /mnt/vendor/persist/data/pfm/licenses/Oplus_QC_LTM_SM8475_2022_07_05.pfm
+    copy /vendor/etc/Oplus_QC_LTM_SM8475_2022_05_10.pfm /mnt/vendor/persist/data/pfm/licenses/Oplus_QC_LTM_SM8475_2022_05_10.pfm
+    copy /vendor/etc/Oplus_QC_LTM_SM7475_2023_02_01.pfm /mnt/vendor/persist/data/pfm/licenses/Oplus_QC_LTM_SM7475_2023_02_01.pfm
+    chown system system /mnt/vendor/persist/data/pfm/licenses/Oplus_QC_LTM_SM8450_2021_10_12.pfm
+    chown system system /mnt/vendor/persist/data/pfm/licenses/Oplus_QC_LTM_SM8475_2022_07_05.pfm
+    chown system system /mnt/vendor/persist/data/pfm/licenses/Oplus_QC_LTM_SM8475_2022_05_10.pfm
+    chown system system /mnt/vendor/persist/data/pfm/licenses/Oplus_QC_LTM_SM7475_2023_02_01.pfm
+
+    # Widevine
+    copy /vendor/etc/oplus_Widevine_licenses.pfm /mnt/vendor/persist/data/pfm/licenses/oplus_Widevine_licenses.pfm
+    chown system system /mnt/vendor/persist/data/pfm/licenses/oplus_Widevine_licenses.pfm
+
+    # ZRAM
+    swapon_all /vendor/etc/fstab.zram
+
+on property:vendor.post_boot.parsed=1
+    # IRQ Tuning
+    # IRQ 243: msm_drm
+    # IRQ 240: kgsl_3d0_irq
+    write /proc/irq/243/smp_affinity_list 2
+    write /proc/irq/240/smp_affinity_list 1
+
+service oplus-sh /odm/bin/init.oplus.sh
+    user root
+    group root
+    oneshot
