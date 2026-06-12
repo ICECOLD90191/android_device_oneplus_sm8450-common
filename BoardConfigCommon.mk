@@ -88,49 +88,33 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_RAMDISK_USE_LZ4 := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 TARGET_KERNEL_SOURCE := kernel/oneplus/sm8450
-TARGET_KERNEL_CONFIG := gki_defconfig vendor/waipio_GKI.config vendor/oplus/waipio_GKI.config vendor/debugfs.config vendor/udon.config
+TARGET_KERNEL_CONFIG := gki_defconfig vendor/waipio_GKI.config vendor/oplus_GKI.config vendor/debugfs.config
 
 # Kernel modules
 BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(TARGET_KERNEL_SOURCE)/modules.vendor_blocklist.msm.waipio
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/modules.load))
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE)
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/modules.load.first_stage))
-BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/modules.load.first_stage $(COMMON_PATH)/modules.load.recovery))
-BOOT_KERNEL_MODULES := $(strip $(shell cat $(COMMON_PATH)/modules.include.vendor_ramdisk $(COMMON_PATH)/modules.load.first_stage $(COMMON_PATH)/modules.load.recovery))
-
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/modules.load.vendor_boot))
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/modules.load.recovery))
+BOOT_KERNEL_MODULES := $(strip $(shell cat $(COMMON_PATH)/modules.load.recovery))
 TARGET_KERNEL_EXT_MODULE_ROOT := kernel/oneplus/sm8450-modules
 TARGET_KERNEL_EXT_MODULES := \
-	qcom/opensource/mmrm-driver \
-	qcom/opensource/audio-kernel \
-	qcom/opensource/camera-kernel \
-	qcom/opensource/dataipa/drivers/platform/msm \
-	qcom/opensource/datarmnet/core \
-	qcom/opensource/datarmnet-ext/aps \
-	qcom/opensource/datarmnet-ext/offload \
-	qcom/opensource/datarmnet-ext/shs \
-	qcom/opensource/datarmnet-ext/perf \
-	qcom/opensource/datarmnet-ext/perf_tether \
-	qcom/opensource/datarmnet-ext/sch \
-	qcom/opensource/datarmnet-ext/wlan \
-	qcom/opensource/display-drivers/msm \
-	qcom/opensource/eva-kernel \
-	qcom/opensource/cvp-kernel \
-	qcom/opensource/video-driver \
-	qcom/opensource/wlan/qcacld-3.0/.qca6490
-
-TARGET_KERNEL_EXT_MODULES += \
-    oplus/kernel/cpu/thermal:kbuild \
-    oplus/kernel/device_info/cs_press:kbuild \
-    oplus/kernel/dfr:kbuild \
-    oplus/kernel/network/oplus_network_oem_qmi:kbuild \
-    oplus/kernel/network/oplus_network_sim_detect:kbuild \
-    oplus/kernel/network/oplus_rf_cable_monitor:kbuild \
-    oplus/kernel/touchpanel/oplus_touchscreen_v2/touch_custom:kbuild \
-    oplus/kernel/touchpanel/oplus_touchscreen_v2:kbuild \
-    oplus/secure/biometrics/fingerprints/bsp/uff/driver:kbuild \
-    oplus/secure/common/bsp/drivers/oplus_secure_common \
-    oplus/sensor/kernel/oplus_consumer_ir:kbuild \
-    oplus/sensor/kernel/qcom/sensor:kbuild
+    qcom/opensource/mmrm-driver \
+    qcom/opensource/audio-kernel \
+    qcom/opensource/camera-kernel \
+    qcom/opensource/dataipa/drivers/platform/msm \
+    qcom/opensource/datarmnet/core \
+    qcom/opensource/datarmnet-ext/aps \
+    qcom/opensource/datarmnet-ext/offload \
+    qcom/opensource/datarmnet-ext/shs \
+    qcom/opensource/datarmnet-ext/perf \
+    qcom/opensource/datarmnet-ext/perf_tether \
+    qcom/opensource/datarmnet-ext/sch \
+    qcom/opensource/datarmnet-ext/wlan \
+    qcom/opensource/display-drivers/msm \
+    qcom/opensource/eva-kernel \
+    qcom/opensource/video-driver \
+    qcom/opensource/wlan/qcacld-3.0/.qca6490
 
 # Platform
 BOARD_USES_QCOM_HARDWARE := true
