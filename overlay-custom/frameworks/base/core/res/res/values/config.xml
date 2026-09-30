@@ -4,6 +4,9 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
+    <!-- AOD wallpaper -->
+    <bool name="config_dozeSupportsAodWallpaper">true</bool>
+
     <!-- Defines the actions shown in advanced reboot submenu -->
     <string-array name="config_restartActionsList">
         <item>restart</item>
