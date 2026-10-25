@@ -1,0 +1,7 @@
+on init
+    setprop ro.boot.vendor.qspa.modem "enabled"
+    setprop ro.boot.vendor.qspa.nav "enabled"
+    setprop persist.oplus.qspa.modem "enabled"
+
+on property:ro.boot.vendor.qspa.modem=enabled
+    setprop persist.oplus.qspa.modem "enabled"

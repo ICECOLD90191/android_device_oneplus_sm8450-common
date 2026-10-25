@@ -29,7 +29,16 @@ on early-boot
     write /sys/bus/msm_subsys/devices/subsys10/restart_level RELATED
 
 on boot
-    chmod 0000 /sys/kernel/oplus_display/hbm
+    # Display - FOD LHBM requires system write access
+    chown system system /dev/oplus_display
+    chown system system /sys/kernel/oplus_display/dimlayer_bl_en
+    chown system system /sys/kernel/oplus_display/dynamic_osc_clock
+    chown system system /sys/kernel/oplus_display/hbm
+    chown system system /sys/kernel/oplus_display/notify_fppress
+    chown system system /sys/kernel/oplus_display/panel_serial_number
+
+    # Sensors
+    chown system system /sys/devices/platform/soc/soc:sensor_fb/adsp_notify
 
 on property:ro.boot.prjname=*
     # Display
@@ -66,4 +75,10 @@ on property:vendor.post_boot.parsed=1
 service oplus-sh /odm/bin/init.oplus.sh
     user root
     group root
+    oneshot
+
+service oplus_sensor_fb /odm/bin/oplus_sensor_fb
+    user system
+    group system
+    class late_start
     oneshot

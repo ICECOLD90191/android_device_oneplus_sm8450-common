@@ -1,6 +1,9 @@
 ## All proprietary files from this list, unless pinned and noted otherwise,
 ## are from OnePlus 10T (CPH2415_11_H.82).
 
+system_ext/lib64/vendor.qti.ImsRtpService-V2-ndk.so
+
+
 # ACDBs
 vendor/etc/acdbdata/nn_ns_models/fai__2.0.0_0.1__3.0.0_0.0__eai_1.36_enpu2.pmd
 vendor/etc/acdbdata/nn_ns_models/fai__2.3.0_0.1__3.0.0_0.0__eai_1.10.pmd
@@ -8,6 +11,8 @@ vendor/etc/acdbdata/nn_ns_models/fai__2.3.0_0.1__3.0.0_0.0__eai_1.36_enpu2_comp.
 vendor/etc/acdbdata/nn_ns_models/fai__2.7.20_0.0__3.0.0_0.0__eai_1.36_enpu2.pmd
 vendor/etc/acdbdata/nn_ns_models/fai__2.7.2_0.0__3.0.0_0.0__eai_1.36_enpu2.pmd
 vendor/etc/acdbdata/nn_vad_models/fai__3.0.0_0.0__eai_1.36_enpu2.pmd
+
+
 
 # ADSP - from ingot user 14 UKQ1.240227.155 155 release-keys
 vendor/bin/adsprpcd|4821003d01528b1fb5b7b409cd80e4307129ec9d
@@ -275,27 +280,58 @@ vendor/etc/Oplus_QC_LTM_SM8475_2022_05_10.pfm
 vendor/etc/Oplus_QC_LTM_SM8475_2022_07_05.pfm
 vendor/etc/Oplus_QC_LTM_SM7475_2023_02_01.pfm
 
+# Display (Pixelworks)
+vendor/lib64/vendor.pixelworks.hardware.feature-V1-ndk_platform.so
+odm/lib64/libpwirispq.so
+odm/lib64/libpwirisPCS.so
+odm/bin/hw/vendor.pixelworks.hardware.feature.irisfeature-service|eebcbaf7f998fc5a31b5196f149f6e6e6dc75bce
+odm/bin/irisConfig|e91217b7576a06f7a488d75a799a277c2b94ce5e
+odm/etc/init/vendor.pixelworks.hardware.feature.irisfeature-service.rc|b101017db60dcdd73e53188f4b44c3f0c04502c5
+odm/etc/vintf/manifest/vendor.pixelworks.hardware.feature.irisfeature-service.xml|03e2bd611d843301566f053e77a544c9dfccb671
+odm/lib64/libpwirisIoctlWrapper.so|168507a15fcf948f07c04cb94dda65fa762519df
+odm/lib64/libpwiriscalibrate.so|abcd72e050b1d7f584ea083c8aa60089e8679da8
+odm/lib64/libpwirisservice.so|01056956a38606d8b4c8585da892c119c975e8b7
+odm/lib64/libpwirissoft.so|9a67d24f770143353acb09f780a8ac61c95dcfa3
+odm/lib64/libpwsoftirisPCS.so|ef224d70bb78032dc3ddcde0a54ffba44e8f4709
+odm/lib64/libsnapdragoncolor-pxlw.so|34d722bf0d1feea5960413add73a85dcea5df905
+odm/lib64/vendor.pixelworks.hardware.feature@1.0.so|87db8ecc691773c9ae188adff1540a91ed234f2e
+odm/lib64/vendor.pixelworks.hardware.feature@1.1.so|d5d20ca1210292d0cfdfa0eb97a75e3e274020dd
+vendor/lib64/libpwirisfeature.so|3e88351eb7f9222328c285a1c6448cffc7359aa3
+vendor/lib64/libpwirishalwrapper.so|de8e257fee9f489875a7466aecf53a1ed97f6ee9
+vendor/lib64/vendor.pixelworks.hardware.display@1.0.so|67e9876177f98e5cd5ccc62f6d8b4ff3219fb77f
+vendor/lib64/vendor.pixelworks.hardware.display@1.1.so|90978a517e16a310c6897aa8cb2f4c2fac4a414d
+vendor/lib64/vendor.pixelworks.hardware.display@1.2.so|287648de77811ae706c700fb73483d1c081ea050
+vendor/lib64/vendor.pixelworks.hardware.feature@1.0.so;MODULE_SUFFIX=_vendor|87db8ecc691773c9ae188adff1540a91ed234f2e
+
 # Display HDR
-vendor/lib64/libhdr_backlight_adapter.so
 vendor/lib64/libhdr_stub.so
 vendor/lib64/libhdr_tm.so
 vendor/lib64/libhdrdynamic.so
 vendor/lib64/libhdrdynamicootf.so
 
 # Display (HWC)
-vendor/bin/qdcmss
-vendor/etc/init/qdcmss.rc
-vendor/lib64/libdisplayconfig.qti.so
-vendor/lib64/libdpps.so
-vendor/lib64/libgame_enhance.so
-vendor/lib64/libmemutils.so
-vendor/lib64/libqdcm-algo.so
-vendor/lib64/libqdcm-json-mode-parser.so
-vendor/lib64/libqdcm-mode-parser.so
-vendor/lib64/libsnapdragoncolor-manager.so
-vendor/lib64/libsnapdragoncolor-qdcm.so
+vendor/lib64/libcwb_client_vendor.so
+odm/etc/vintf/manifest/manifest_oplus_cwb.xml|8b03271b55b4ce9722e91a6d42e571c138bcb61f
+vendor/bin/hw/vendor.qti.hardware.display.composer-service|0c8801e1c7e26f2806f557c81f2d8238e277d363|a6d0a4092acae8d9a161f51946184ce26d06f17e
+vendor/bin/qdcmss|801d4429210c1a4f8c01f6d91f172ff063c5c307
+vendor/etc/init/qdcmss.rc|53d78d686678c4f923a9ec4ace7d4d3575b13788
+vendor/etc/snapdragon_color_libs_config.xml|ecfd798ea68959e78abfecaf1ec4220486573665
+vendor/lib64/libcwb_qcom.so|8a375aaa43896415ceb74e5627ebebb39e2dd04a
+vendor/lib64/libdpps.so|17fdc5ebb4824f455f976d54b9222d450c2aadb4|ee21d11f4f693f84d2879fb81bdb1f60048e154c
+vendor/lib64/libgame_enhance.so|4432e47d990e98edb141becc345a92d03df26bf4
+vendor/lib64/libhistogram.so|e3337e11056ae5e43280c33f090a0dac007e05c8
+vendor/lib64/libmemutils.so|8102e47e3d1c521bfcb1201477006cd5bc339379
+vendor/lib64/libqdcm-algo.so|4ab77288626ca1978ed2a7c15b945af6c223db9b
+vendor/lib64/libqdcm-json-mode-parser.so|decc0d77e1aec8bafc8c0e43f54dd6a14c018466
+vendor/lib64/libqdcm-mode-parser.so|e63dc113ab3728d8b2d3034c7a2027c4c4117ec2
+vendor/lib64/libqdutils.so|f7af24a1b59ddae9d243910bda0829f41410c778
+vendor/lib64/libsdmcore.so|c1b24759882fa9370f4d6ee07987c15abb22c625
+vendor/lib64/libsdmutils.so|bfbc1e46f21e54b836d6500fbd4a03b025f73050
+vendor/lib64/libsnapdragoncolor-manager.so|092cbb36f76b1149c9186b7ae09ce89a5c3de8ca|efe706bb3544e3c8d2c4548edb18f9fb056e5711
+vendor/lib64/libsnapdragoncolor-qdcm.so|79dfb4f2307585bd331dea882ed88c8f131e5838
+vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0.so|ca9a271859796097fcb33981431d30364b6254ca
 
-# Display (SDM) - from ingot user 14 UKQ1.240227.155 155 release-keys
+# Display (SDM)
 vendor/etc/display/DPU660.xml|b26dd73e361546d89bf3d7082a471703dc6ac2cb
 vendor/etc/display/DPU670.xml|e5131a60ceff29ca5eb561eec7eddadef1d0486f
 vendor/etc/display/DPU720.xml|4e54e8712d65773eb87867bf64a4cb98ea9bb8c3
@@ -303,33 +339,81 @@ vendor/etc/display/DPU7__.xml|c056f3cb9fa123ca3de5b2a9775c184dddf25b9d
 vendor/etc/display/DPU820.xml|35afcb7834d13eacc8f14d2ff4ac5132bb01a563
 vendor/etc/display/DPU8__.xml|2360038d60e9dff36d7f14a59a25da74bac1abe4
 vendor/etc/display/DPU9__.xml|ed8ec4a7a6852d8340bd98448db9f13634083edd
+vendor/etc/display/advanced_sf_offsets.xml|29b6b0554d6393a8be90f52fce010946abd38d52
+vendor/etc/display/thermallevel_to_fps.xml|bc38035c8f41308fc25cc30969fbbf16ab86c43f
 vendor/lib64/libbacklight-calib.so|a5990fa87932196f9e2c38b2ec85786daa6b3a9c
-vendor/lib64/libdigital-dimming.so|66506a386dc80da0994c9d4aeac34edfc1830c5c
-vendor/lib64/libdisplayqos.so|f5620aafca45f8f5c89e5af5d808bd20602a4654
-vendor/lib64/libdisplayskuutils.so|405e2456d79c8e0118efb9ade2d8a8d82565af5c
-vendor/lib64/libqseed3.so|6fcc4cb419053b57fc14d7cb2e3fdb18901cc87e
+vendor/lib64/libdigital-dimming.so|566aae7c648ada0f88106b3085ce9a21d465c4ef
+vendor/lib64/libdisplayqos.so|7bb396a7497a1f7f856859bbb03bb190510f83a8
+vendor/lib64/libdisplayskuutils.so|0179f35a0d955432cacc7392d60f86c6b0b533db
+vendor/lib64/libhdr_backlight_adapter.so|57036c19938fe40e73e9b9e3d4c6a6073d7aa858
+vendor/lib64/libmm-hdcpmgr.so|cc01545cb020a8eb776bb72443c85f576da12380
+vendor/lib64/libqrtrclient.so|251146748531781010bcc33110f6afaa340f6a33
+vendor/lib64/libqseed3.so|9d0de1d3ca9d15160019171b9da8b26fa3591337
 vendor/lib64/librcmask.so|36919cfe71e1e6ab4e507f98dab320b7046d24c4
-vendor/lib64/libsdm-color.so|3ffdac82ec83cfcf0cfab32718a08500ec73e36d
-vendor/lib64/libsdm-colormgr-algo.so|0c922b88dc8f11a9c8dbe78daec337d4d5333087
-vendor/lib64/libsdm-disp-vndapis.so|169adaa522f75d622e76a1597c486eff4551c5a3
-vendor/lib64/libsdmextension.so|08d321d3e0da2231a29e3ec92604dca48c8895e3
+vendor/lib64/libsdedrm.so|aa0cd600c9e8575d6697964890035510117ee4d3
+vendor/lib64/libsdm-color.so|f3ce532eaa9276c3739098075c48dc80721af02d
+vendor/lib64/libsdm-colormgr-algo.so|0d2f6e86fa6aab8e83561a2efbd0c4984a22593b
+vendor/lib64/libsdm-disp-vndapis.so|dcef73e6905f5cb44cb4df07a6719c394a20667d
+vendor/lib64/libsdmextension.so|120f79e071dff5a0bc1ca355885224c8a8749aec
 vendor/lib64/libtestutils.so|61b98f252afde4eb7c674de870e7afb590c9bb2a
 vendor/lib64/libtinyxml2_1.so|ae0c9190fd54c18a6c28dfccdfd29655abcb08de
 
+
 # Display postprocessing
-vendor/bin/hw/vendor.display.color@1.0-service
-vendor/bin/ppd
-vendor/etc/init/vendor.display.color@1.0-service.rc
-vendor/lib64/libdisp-aba.so
-vendor/lib64/vendor.display.color@1.0.so
-vendor/lib64/vendor.display.color@1.1.so
-vendor/lib64/vendor.display.color@1.2.so
-vendor/lib64/vendor.display.color@1.3.so
-vendor/lib64/vendor.display.color@1.4.so
-vendor/lib64/vendor.display.color@1.5.so
-vendor/lib64/vendor.display.color@1.6.so
-vendor/lib64/vendor.display.color@1.7.so
-vendor/lib64/vendor.display.postproc@1.0.so
+vendor/bin/hw/vendor.display.color@1.0-service|daa3a8bc5e1c5f3f6770eff66ee9be9c7da2c7ea
+vendor/bin/ppd|7c7c7ea24717c518bc4a768fb606b9a2ab72e16e
+vendor/etc/init/vendor.display.color@1.0-service.rc|5ad673f879b3685a0e79b5633437e5499cb94f48
+vendor/lib64/libdisp-aba.so|a0f0d57b3a2823cf50181af38a8a33555b63d67c
+vendor/lib64/vendor.display.color@1.0.so|2b4b4abd80805ca0bee6ed03becc807e9294c374
+vendor/lib64/vendor.display.color@1.1.so|d66e9fbcf148ff55d1356a7652f423d96d1d077b
+vendor/lib64/vendor.display.color@1.2.so|0cae7a222ae8c3747676b85d1ead33421c7e1699
+vendor/lib64/vendor.display.color@1.3.so|67eac5bd0e40ad3ec3bdd245d62d6a87b703d058
+vendor/lib64/vendor.display.color@1.4.so|cb57999215d56888440a9856ec83ea6e9e1f5f72
+vendor/lib64/vendor.display.color@1.5.so|c8f8961677aa366d8f84fa06e3a89307a6f429f0
+vendor/lib64/vendor.display.color@1.6.so|8c75e006c9cc11f63d074455a0d01f2a62eb1339
+vendor/lib64/vendor.display.color@1.7.so|4d13a9df363728ef6b5794ac5c2aa9a2acc6aa1b
+vendor/lib64/vendor.display.postproc@1.0.so|1876732e916ccf0a0100c6272e97de15df8c6984
+
+#display calibration
+vendor/etc/display/DPU660.xml
+vendor/etc/display/DPU670.xml
+vendor/etc/display/DPU720.xml
+vendor/etc/display/DPU7__.xml
+vendor/etc/display/DPU820.xml
+vendor/etc/display/DPU830.xml
+vendor/etc/display/DPU860.xml
+vendor/etc/display/DPU8__.xml
+vendor/etc/display/DPU9__.xml
+vendor/etc/display/advanced_sf_offsets.xml
+vendor/etc/display/backlight_calib_r66451_amoled_cmd_mode_dsi_visionox_panel_with_DSC.xml
+vendor/etc/display/backlight_calib_r66451_amoled_video_mode_dsi_visionox_panel_with_DSC.xml
+vendor/etc/display/qdcm_calib_data_22001_samsung_S6E3XA2_dsc_cmd_mode_panel.json
+vendor/etc/display/qdcm_calib_data_22001_samsung_s6e3fac_fhd_cmd_mode_dsc_dsi_panel.json
+vendor/etc/display/qdcm_calib_data_BF185_P_3_A0001_dsc_cmd_mode_panel.json
+vendor/etc/display/qdcm_calib_data_BOE_AB241_NT37701A.json
+vendor/etc/display/qdcm_calib_data_Sharp_2k_cmd_mode_qsync_dsi_panel.json
+vendor/etc/display/qdcm_calib_data_Sharp_2k_video_mode_qsync_dsi_panel.json
+vendor/etc/display/qdcm_calib_data_Sharp_4k_cmd_mode_dsc_dsi_panel.json
+vendor/etc/display/qdcm_calib_data_Sharp_4k_video_mode_dsc_dsi_panel.json
+vendor/etc/display/qdcm_calib_data_Sharp_qhd_cmd_mode_dsi_panel.json
+vendor/etc/display/qdcm_calib_data_boe_nt37705_dsc_cmd_mode_panel.json
+vendor/etc/display/qdcm_calib_data_boe_rm692e5_dsc_cmd_mode_panel.json
+vendor/etc/display/qdcm_calib_data_nt36672e_lcd_video_mode_dsi_novatek_panel_with_DSC.json
+vendor/etc/display/qdcm_calib_data_nt36672e_lcd_video_mode_dsi_novatek_panel_without_DSC.json
+vendor/etc/display/qdcm_calib_data_r66451_amoled_cmd_mode_dsi_visionox_panel_with_DSC.json
+vendor/etc/display/qdcm_calib_data_r66451_amoled_cmd_mode_dsi_visionox_panel_without_DSC.json
+vendor/etc/display/qdcm_calib_data_r66451_amoled_video_mode_dsi_visionox_panel_with_DSC.json
+vendor/etc/display/qdcm_calib_data_r66451_amoled_video_mode_dsi_visionox_panel_without_DSC.json
+vendor/etc/display/qdcm_calib_data_samsung_S6E3HC3_dsc_cmd_mode_panel.json
+vendor/etc/display/qdcm_calib_data_samsung_S6E3HC3_dsc_cmd_mode_panel_21631.json
+vendor/etc/display/qdcm_calib_data_samsung_ams662zs02_dsc_cmd_mode_panel.json
+vendor/etc/display/qdcm_calib_data_senna22623_ab575_tm_nt37705_dsc_cmd_mode_panel.json
+vendor/etc/display/qdcm_calib_data_senna_ab575_04id_tm_nt37705_dsc_cmd_mode_panel.json
+vendor/etc/display/qdcm_calib_data_senna_ab575_tm_nt37705_dsc_cmd_mode_panel.json
+vendor/etc/display/qdcm_calib_data_sharp_1080p_cmd_mode_dsi_panel.json
+vendor/etc/display/qdcm_calib_data_tianma_ili7838a_dsc_cmd_mode_panel.json
+vendor/etc/display/qdcm_calib_data_tianma_nt37705_dsc_cmd_mode_panel.json
+vendor/etc/display/thermallevel_to_fps.xml
 
 # DPM
 vendor/bin/dpmQmiMgr
@@ -453,7 +537,7 @@ system_ext/etc/init/horae.rc|fc8b2a0becf5d9cec527df7c6974ff77de80f3a2
 
 # IMS (system)
 system/lib64/vendor.qti.diaghal-V1-ndk.so:system_ext/lib64/vendor.qti.diaghal-V1-ndk.so
-system_ext/app/ImsRcsService/ImsRcsService.apk
+#system_ext/app/ImsRcsService/ImsRcsService.apk not present 
 system_ext/app/QtiTelephonyService/QtiTelephonyService.apk
 system_ext/framework/qcrilhook.jar
 system_ext/framework/vendor.qti.ims.connection-V1.0-java.jar
@@ -481,7 +565,7 @@ system_ext/lib64/vendor.qti.ImsRtpService-V1-ndk.so
 system_ext/priv-app/ims/ims.apk
 system_ext/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 system_ext/etc/permissions/telephony_system-ext_privapp-permissions-qti.xml
-system_ext/etc/permissions/vendor.qti.ims.rcsservice.xml
+# system_ext/etc/permissions/vendor.qti.ims.rcsservice.xml not present
 system_ext/etc/sysconfig/qti_whitelist_system_ext.xml
 system_ext/lib64/vendor.qti.imsrtpservice@3.0.so
 system_ext/lib64/vendor.qti.imsrtpservice@3.1.so
@@ -841,8 +925,8 @@ odm/lib64/libsubsys-utils.so
 odm/lib64/vendor.oplus.hardware.appradio@1.0.so
 odm/lib64/vendor.oplus.hardware.ims@1.0.so
 odm/lib64/vendor.oplus.hardware.radio@1.0.so
-odm/lib64/vendor.oplus.hardware.subsys_radio-V4-ndk_platform.so
-odm/lib64/vendor.oplus.hardware.subsys-V3-ndk_platform.so
+odm/lib64/vendor.oplus.hardware.subsys_radio-V9-ndk_platform.so
+odm/lib64/vendor.oplus.hardware.subsys-V5-ndk_platform.so
 
 # RIL (system)
 system_ext/etc/permissions/qcrilhook.xml
@@ -940,7 +1024,6 @@ vendor/lib64/libqcrildatactl.so
 vendor/lib64/libqcrildataqos.so
 vendor/lib64/libqdpr.so
 vendor/lib64/libqrtr.so
-vendor/lib64/libqrtrclient.so
 vendor/lib64/libqsocket.so
 vendor/lib64/libril-db.so
 vendor/lib64/libril-legacy.so
@@ -1001,7 +1084,6 @@ vendor/bin/sscrpcd
 vendor/etc/init/init.vendor.sensors.rc
 vendor/etc/init/vendor.sensors.qti.rc
 vendor/etc/init/vendor.sensors.sscrpcd.rc
-vendor/lib64/libcwb_client_vendor.so
 vendor/lib64/libnanopb.so
 vendor/lib64/libsensorcal.so
 vendor/lib64/libsensorslog.so
@@ -1013,7 +1095,6 @@ vendor/lib64/libsnsapi.so
 vendor/lib64/libsnsdiaglog.so
 vendor/lib64/libssc.so
 vendor/lib64/libssc_default_listener.so
-vendor/lib64/vendor.oplus.hardware.cwb@1.0.so
 
 # Sensors config
 vendor/etc/sensors/config/diwali_default_sensors.json
@@ -1107,6 +1188,12 @@ odm/etc/init/vendor-oplus-hardware-touch-V2-service.rc|4f5aeae41c029835e747efa36
 odm/etc/vintf/manifest/manifest_touch_aidl.xml|533fa17a03339bb0ddb42029e20fd9b20e530101
 odm/lib64/libtensorflowlite_oplus.so|63e4202be5edb8eae61dbc6958e3e1127996d903
 odm/lib64/libolc_vnd.so|ab94af1844957f761b410a767a605ba24c89bc8c
+odm/firmware/tp/22803/sys_edge_touch_config.xml
+odm/lib64/vendor.oplus.hardware.touch-V1-ndk_platform.so
+odm/lib64/vendor.oplus.hardware.touch-V2-ndk_platform.so
+# odm/lib64/vendor.oplus.hardware.olc2-V1-ndk_platform.so from source
+# system/lib64/libdumpstateutil.so:odm/lib64/libdumpstateutil.so from source
+
 
 # Trusted Execution Environment connector
 vendor/bin/hw/vendor.qti.hardware.qteeconnector@1.0-service
@@ -1218,7 +1305,6 @@ vendor/etc/seccomp_policy/wifidisplayhalservice.policy
 vendor/etc/wfdconfig.xml
 vendor/lib64/hw/vendor.qti.hardware.wifidisplaysession@1.0-impl.so
 vendor/lib64/libFileMux_proprietary.so
-vendor/lib64/libmm-hdcpmgr.so
 vendor/lib64/libmmrtpdecoder_vendor.so
 vendor/lib64/libmmrtpencoder_vendor.so
 vendor/lib64/libwfdcodecv4l2_proprietary.so

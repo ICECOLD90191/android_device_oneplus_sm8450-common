@@ -58,6 +58,9 @@ PRODUCT_PACKAGES += \
 AUDIO_HAL_DIR := hardware/qcom-caf/sm8450/audio/primary-hal
 QCV_FAMILY_SKUS := taro cape ukee
 
+$(call soong_config_set,surfaceflinger,udfps_lib,//hardware/oplus:libudfps_extension.oplus)
+$(call soong_config_set,qtidisplay,pxlw_vendor_namespace,vendor/oneplus/sm8450-common)
+
 PRODUCT_COPY_FILES += \
 $(foreach DEVICE_SKU, $(QCV_FAMILY_SKUS), \
     $(AUDIO_HAL_DIR)/configs/taro/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_$(DEVICE_SKU)/audio_effects.conf \
@@ -111,16 +114,9 @@ PRODUCT_PACKAGES += \
     init.qti.display_boot.rc \
     init.qti.display_boot.sh \
     vendor.qti.hardware.display.allocator-service \
-    vendor.qti.hardware.display.demura-service
-
-ifeq ($(TARGET_USES_PREBUILT_HWC),true)
-PRODUCT_PACKAGES += \
+    vendor.qti.hardware.display.demura-service     \
     vendor.qti.hardware.display.composer-service.rc \
     vendor.qti.hardware.display.composer-service.xml
-else
-PRODUCT_PACKAGES += \
-    vendor.qti.hardware.display.composer-service
-endif
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
@@ -212,6 +208,7 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.sh \
     init.target.rc \
     ueventd.oplus.rc \
+    qspa_system.rc \
     ueventd.qcom.rc
 
 $(call soong_config_set,libinit,vendor_init_lib,//$(LOCAL_PATH):libinit_oplus)

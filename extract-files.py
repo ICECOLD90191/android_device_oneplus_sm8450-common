@@ -25,6 +25,7 @@ namespace_imports = [
     'vendor/qcom/opensource/commonsys/display',
     'vendor/qcom/opensource/commonsys-intf/display',
     'vendor/qcom/opensource/dataservices',
+    'vendor/oneplus/udon',
 ]
 
 
@@ -86,6 +87,9 @@ blob_fixups: blob_fixups_user_type = {
         .add_line_if_missing('pipe2: 1'),
     'vendor/lib64/libqcodec2_core.so': blob_fixup()
         .add_needed('libcodec2_shim.so'),
+    'vendor/bin/hw/vendor.qti.hardware.display.composer-service': blob_fixup()
+        .replace_needed('vendor.qti.hardware.display.config-V5-ndk_platform.so', 'vendor.qti.hardware.display.config-V5-ndk.so')
+        .replace_needed('android.hardware.common-V2-ndk_platform.so', 'android.hardware.common-V2-ndk.so'),
     'vendor/lib64/vendor.libdpmframework.so': blob_fixup()
         .add_needed('libhidlbase_shim.so'),
     'system_ext/bin/horae': blob_fixup()
