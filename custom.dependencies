@@ -1,0 +1,31 @@
+[
+  {
+    "repository": "PixelOS-AOSP/android_hardware_oplus",
+    "target_path": "hardware/oplus"
+  },
+  {
+    "repository": "LineageOS/android_hardware_pixelworks_interfaces",
+    "target_path": "hardware/pixelworks/interfaces",
+    "branch": "lineage-24.0"
+  },
+  {
+    "repository": "pjgowtham/android_kernel_oneplus_sm8450",
+    "target_path": "kernel/oneplus/sm8450",
+    "branch": "lineage-23.2"
+  },
+  {
+    "repository": "pjgowtham/android_kernel_oneplus_sm8450-devicetrees",
+    "target_path": "kernel/oneplus/sm8450-devicetrees",
+    "branch": "lineage-23.2"
+  },
+  {
+    "repository": "pjgowtham/android_kernel_oneplus_sm8450-modules",
+    "target_path": "kernel/oneplus/sm8450-modules",
+    "branch": "lineage-23.2"
+  },
+  {
+    "remote": "gitlab",
+    "repository": "NoPrincessHere/proprietary_vendor_oneplus_sm8450-common",
+    "target_path": "vendor/oneplus/sm8450-common"
+  }
+]
