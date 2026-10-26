@@ -21,6 +21,7 @@ persist.sys.horae.enable=1
 persist.dbg.volte_avail_ovr=1
 persist.dbg.vt_avail_ovr=1
 persist.dbg.wfc_avail_ovr=1
+persist.oplus.qspa.modem=enabled
 
 # Media
 media.stagefright.thumbnail.prefer_hw_codecs=true

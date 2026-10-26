@@ -1,5 +1,5 @@
 ## All proprietary files from this list, unless pinned and noted otherwise, are
-## from OnePlus 10 Pro 5G (NE2211_15.0.0.901(EX01))).
+## from OnePlus 11R (CPH2487_16.0.5.1301(EX01)).
 
 # ACDBs
 vendor/etc/acdbdata/nn_ns_models/fai__2.0.0_0.1__3.0.0_0.0__eai_1.36_enpu2.pmd
@@ -157,13 +157,12 @@ vendor/lib64/libsdsprpc.so
 system/lib64/libziparchive.so:odm/lib64/libziparchive_odm.so;FIX_SONAME
 
 # Charging
-odm/bin/hw/vendor.oplus.hardware.charger-V6-service
-odm/etc/init/vendor.oplus.hardware.charger-V6-service.rc
+odm/bin/hw/vendor.oplus.hardware.charger-V11-service
+odm/etc/init/vendor.oplus.hardware.charger-V11-service.rc
 odm/etc/vintf/manifest/manifest_oplus_charger_aidl.xml
 odm/firmware/fastchg/charge_time_config.csv|e5bcc378513cb42bcb071eef327c87920553b0c4
 odm/firmware/fastchg/charging_thermal_config_default.txt
 odm/lib64/libGaiaClient_vnd.so
-odm/lib64/vendor.oplus.hardware.charger-V6-ndk_platform.so
 vendor/etc/charger_fw_fstab.qti
 
 # CNE
@@ -311,7 +310,6 @@ vendor/lib64/libhdrdynamicootf.so
 
 # Display (HWC)
 odm/etc/vintf/manifest/manifest_oplus_cwb.xml
-odm/lib64/vendor.oplus.hardware.cwb@1.0.so
 vendor/bin/hw/vendor.qti.hardware.display.composer-service
 vendor/bin/qdcmss
 vendor/etc/init/qdcmss.rc
@@ -329,20 +327,19 @@ vendor/lib64/libsdmcore.so
 vendor/lib64/libsdmutils.so
 vendor/lib64/libsnapdragoncolor-manager.so
 vendor/lib64/libsnapdragoncolor-qdcm.so
-vendor/lib64/vendor.oplus.hardware.cwb@1.0.so;MODULE_SUFFIX=_vendor
 vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0.so
 
 # Display (Pixelworks)
-odm/bin/hw/vendor.pixelworks.hardware.display.iris-service
 odm/bin/hw/vendor.pixelworks.hardware.feature.irisfeature-service
 odm/bin/irisConfig
 odm/etc/init/vendor.pixelworks.hardware.feature.irisfeature-service.rc
-odm/etc/vintf/manifest/vendor.pixelworks.hardware.display.iris-service.xml
 odm/etc/vintf/manifest/vendor.pixelworks.hardware.feature.irisfeature-service.xml
 odm/lib64/libpwirisIoctlWrapper.so
+odm/lib64/libpwirisPCS.so
 odm/lib64/libpwiriscalibrate.so
 odm/lib64/libpwirisfeature.so;MODULE_SUFFIX=_odm
 odm/lib64/libpwirishalwrapper.so;MODULE_SUFFIX=_odm
+odm/lib64/libpwirispq.so
 odm/lib64/libpwirisservice.so
 odm/lib64/libpwirissoft.so
 odm/lib64/libpwsoftirisPCS.so
@@ -583,9 +580,7 @@ my_product/priv-app/HotwordEnrollmentYGoogleHEXAGON_WIDEBAND.apk:product/priv-ap
 
 # IMS
 system/lib64/vendor.qti.diaghal-V1-ndk.so:system_ext/lib64/vendor.qti.diaghal-V1-ndk.so
-system_ext/app/ImsRcsService/ImsRcsService.apk
 system_ext/etc/permissions/telephony_system-ext_privapp-permissions-qti.xml
-system_ext/etc/permissions/vendor.qti.ims.rcsservice.xml
 system_ext/etc/sysconfig/qti_telephony_system_packages_config.xml
 system_ext/etc/sysconfig/qti_whitelist_system_ext.xml
 system_ext/framework/oplus-ims-ext.jar
@@ -761,7 +756,6 @@ vendor/lib64/libdsd2pcm.so
 
 # Oplus Log Core
 vendor/lib64/libolc_vnd.so
-vendor/lib64/vendor.oplus.hardware.olc2-V1-ndk_platform.so
 
 # Oplus osense
 odm/lib64/libosenseaidlhalclient.so
@@ -937,6 +931,10 @@ vendor/lib64/libspl.so
 vendor/lib64/libssd.so
 vendor/lib64/vendor.qti.hardware.qseecom@1.0.so
 
+# QSPA
+system_ext/etc/init/qspa_system.rc
+system_ext/etc/qspa/qspa_default.rc
+
 # QSPM
 vendor/bin/vendor.qti.qspmhal@1.0-service
 vendor/etc/init/vendor.qti.qspmhal@1.0-service.rc
@@ -1035,7 +1033,6 @@ vendor/lib64/qtiwakelock.so
 vendor/lib64/vendor.oplus.hardware.appradioaidl-V1-ndk_platform.so
 vendor/lib64/vendor.oplus.hardware.communicationcenter-V1-ndk_platform.so
 vendor/lib64/vendor.oplus.hardware.communicationcenter-V2-ndk_platform.so
-vendor/lib64/vendor.oplus.hardware.radio-V2-ndk_platform.so
 vendor/lib64/vendor.qti.hardware.data.connection@1.0.so
 vendor/lib64/vendor.qti.hardware.data.connection@1.1.so
 vendor/lib64/vendor.qti.hardware.data.connectionfactory-V1-ndk_platform.so
@@ -1319,7 +1316,7 @@ system_ext/lib64/libwfddisplayconfig.so|2717202736b678390be7518ce6f69a63079e4217
 system_ext/lib64/libwfdmminterface.so|b560306dbc7b2bffb734c8eb6439dd3721f75c12
 system_ext/lib64/libwfdmmsink.so|a250fd4085ec04345db8067f11962f57c3b166f0
 system_ext/lib64/libwfdmmsrc_system.so|69e08746a9557ee5fba3e02a8170032db0fa0105
-system_ext/lib64/libwfdnative.so;SYMLINK=system_ext/priv-app/WfdService/lib/arm64/libwfdnative.so|923acb22f26dc3aab5115cf685a161611e43c018
+system_ext/lib64/libwfdnative.so;SYMLINK=system_ext/priv-app/WfdService/lib/arm64/libwfdnative.so|923acb22f26dc3aab5115cf685a161611e43c018|363444e6950b31d27cbd1adfcc2b7e219022132b
 system_ext/lib64/libwfdrtsp.so|14eec96c4fa615096c473d5a269ba315a53cfd00
 system_ext/lib64/libwfdservice.so|429839b831a8b16fb858179241dc6183c50bdf13|54624fd8c8ef2932e71c4b3ce176fb712e884f5a
 system_ext/lib64/libwfdsinksm.so|e714120166d6480ada0b629ddd73c499c73c55a2
