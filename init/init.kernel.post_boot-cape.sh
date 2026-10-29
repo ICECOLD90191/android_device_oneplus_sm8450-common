@@ -4,92 +4,6 @@
 # Confidential and Proprietary - Qualcomm Technologies, Inc.
 #=============================================================================
 
-function configure_read_ahead_kb_values() {
-	MemTotalStr=`cat /proc/meminfo | grep MemTotal`
-	MemTotal=${MemTotalStr:16:8}
-
-	dmpts=$(ls /sys/block/*/queue/read_ahead_kb | grep -e dm -e mmc)
-
-	# Set 128 for <= 3GB &
-	# set 512 for >= 4GB targets.
-	if [ $MemTotal -le 3145728 ]; then
-		ra_kb=128
-	else
-		ra_kb=512
-	fi
-	if [ -f /sys/block/mmcblk0/bdi/read_ahead_kb ]; then
-		echo $ra_kb > /sys/block/mmcblk0/bdi/read_ahead_kb
-	fi
-	if [ -f /sys/block/mmcblk0rpmb/bdi/read_ahead_kb ]; then
-		echo $ra_kb > /sys/block/mmcblk0rpmb/bdi/read_ahead_kb
-	fi
-	for dm in $dmpts; do
-		dm_dev=`echo $dm |cut -d/ -f4`
-		if [ "$dm_dev" = "" ]; then
-			is_erofs=""
-		else
-			is_erofs=`mount |grep erofs |grep "${dm_dev} "`
-		fi
-		if [ "$is_erofs" = "" ]; then
-			echo $ra_kb > $dm
-		else
-			echo 128 > $dm
-		fi
-	done
-}
-
-function configure_memory_parameters() {
-	# Set Memory parameters.
-	#
-	# Set per_process_reclaim tuning parameters
-	# All targets will use vmpressure range 50-70,
-	# All targets will use 512 pages swap size.
-	#
-	# Set Low memory killer minfree parameters
-	# 32 bit Non-Go, all memory configurations will use 15K series
-	# 32 bit Go, all memory configurations will use uLMK + Memcg
-	# 64 bit will use Google default LMK series.
-	#
-	# Set ALMK parameters (usually above the highest minfree values)
-	# vmpressure_file_min threshold is always set slightly higher
-	# than LMK minfree's last bin value for all targets. It is calculated as
-	# vmpressure_file_min = (last bin - second last bin ) + last bin
-	#
-	# Set allocstall_threshold to 0 for all targets.
-	#
-	MemTotalStr=`cat /proc/meminfo | grep MemTotal`
-	MemTotal=${MemTotalStr:16:8}
-
-	# configure boost pool
-	if [ $MemTotal -gt 8388608 ]; then
-		echo 128000 > /proc/boost_pool/camera_pages
-	fi
-
-	configure_read_ahead_kb_values
-	echo 100 > /proc/sys/vm/swappiness
-
-	# Disable periodic kcompactd wakeups. We do not use THP, so having many
-	# huge pages is not as necessary.
-	echo 0 > /proc/sys/vm/compaction_proactiveness
-
-	# With THP enabled, the kernel greatly increases min_free_kbytes over its
-	# default value. Disable THP to prevent resetting of min_free_kbytes
-	# value during online/offline pages.
-	# 11584kb is the standard kernel value of min_free_kbytes for 8Gb of lowmem
-	if [ -f /sys/kernel/mm/transparent_hugepage/enabled ]; then
-		echo never > /sys/kernel/mm/transparent_hugepage/enabled
-	fi
-
-	if [ $MemTotal -le 8388608 ]; then
-		echo 40 > /proc/sys/vm/watermark_scale_factor
-	else
-		echo 16 > /proc/sys/vm/watermark_scale_factor
-	fi
-
-	echo 0 > /proc/sys/vm/watermark_boost_factor
-	echo 11584 > /proc/sys/vm/min_free_kbytes
-}
-
 rev=`cat /sys/devices/soc0/revision`
 ddr_type=`od -An -tx /proc/device-tree/memory/ddr_device_type`
 ddr_type4="07"
@@ -125,8 +39,8 @@ echo 0 > /sys/devices/system/cpu/cpu0/core_ctl/enable
 # Setting b.L scheduler parameters
 echo 85 85 > /proc/sys/walt/sched_downmigrate
 echo 95 95 > /proc/sys/walt/sched_upmigrate
-echo 380 > /proc/sys/walt/sched_group_downmigrate
-echo 400 > /proc/sys/walt/sched_group_upmigrate
+echo 85 > /proc/sys/walt/sched_group_downmigrate
+echo 100 > /proc/sys/walt/sched_group_upmigrate
 echo 1 > /proc/sys/walt/sched_walt_rotate_big_tasks
 echo 400000000 > /proc/sys/walt/sched_coloc_downmigrate_ns
 echo 39000000 39000000 39000000 39000000 39000000 39000000 39000000 5000000 > /proc/sys/walt/sched_coloc_busy_hyst_cpu_ns
@@ -150,10 +64,6 @@ echo 0 > /proc/sys/walt/sched_boost
 # Reset the RT boost, which is 1024 (max) by default.
 echo 0 > /proc/sys/kernel/sched_util_clamp_min_rt_default
 
-# Limit kswapd in cpu0-X(never runs on super core[6])
-echo `ps -elf | grep -v grep | grep kswapd0 | awk '{print $2}'` > /dev/cpuset/kswapd-like/tasks
-echo `ps -elf | grep -v grep | grep kcompactd0 | awk '{print $2}'` > /dev/cpuset/kswapd-like/tasks
-
 # configure governor settings for silver cluster
 echo "walt" > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
 echo 0 > /sys/devices/system/cpu/cpufreq/policy0/walt/down_rate_limit_us
@@ -167,16 +77,12 @@ echo 1 > /sys/devices/system/cpu/cpufreq/policy0/walt/pl
 echo 1132800 0 0 0 0 0 0 0 > /proc/sys/walt/input_boost/input_boost_freq
 echo 100 > /proc/sys/walt/input_boost/input_boost_ms
 
-# config cpufreq_bouncing parameters for gold cluster
-echo "1,1,14,30,2,50,1,50"  > /sys/module/cpufreq_bouncing/parameters/config
-
 # configure governor settings for gold cluster
 echo "walt" > /sys/devices/system/cpu/cpufreq/policy4/scaling_governor
 echo 0 > /sys/devices/system/cpu/cpufreq/policy4/walt/down_rate_limit_us
 echo 0 > /sys/devices/system/cpu/cpufreq/policy4/walt/up_rate_limit_us
 echo 1555200 > /sys/devices/system/cpu/cpufreq/policy4/walt/hispeed_freq
 echo 1 > /sys/devices/system/cpu/cpufreq/policy4/walt/pl
-echo "80 2112000:95" > /sys/devices/system/cpu/cpufreq/policy4/walt/target_loads
 
 # configure governor settings for gold+ cluster
 echo "walt" > /sys/devices/system/cpu/cpufreq/policy7/scaling_governor
@@ -184,19 +90,9 @@ echo 0 > /sys/devices/system/cpu/cpufreq/policy7/walt/down_rate_limit_us
 echo 0 > /sys/devices/system/cpu/cpufreq/policy7/walt/up_rate_limit_us
 echo 1651200 > /sys/devices/system/cpu/cpufreq/policy7/walt/hispeed_freq
 echo 1 > /sys/devices/system/cpu/cpufreq/policy7/walt/pl
-echo "80 2380800:95" > /sys/devices/system/cpu/cpufreq/policy7/walt/target_loads
 
 # colocation V3 settings
 echo 768000 > /sys/devices/system/cpu/cpufreq/policy4/walt/rtg_boost_freq
-
-# config cpufreq_bouncing parameters for gold+ cluster
-echo "2,1,14,30,2,50,1,50"  > /sys/module/cpufreq_bouncing/parameters/config
-
-#config power effiecny tunning parameters
-echo 1 > /sys/module/cpufreq_effiency/parameters/affect_mode
-echo "307200,45000,1324800,52000,0"  > /sys/module/cpufreq_effiency/parameters/cluster0_effiency
-echo "633600,50000,1996800,55000,0"  > /sys/module/cpufreq_effiency/parameters/cluster1_effiency
-echo "787200,55000,1996800,60000,0"  > /sys/module/cpufreq_effiency/parameters/cluster2_effiency
 
 # configure bus-dcvs
 bus_dcvs="/sys/devices/system/cpu/bus_dcvs"
@@ -276,7 +172,6 @@ done
 
 #set s2idle as default
 echo s2idle > /sys/power/mem_sleep
-configure_memory_parameters
 
 #Enable LPM
 echo N > /sys/devices/system/cpu/qcom_lpm/parameters/sleep_disabled
@@ -308,7 +203,5 @@ case "$console_config" in
 		echo "Enable console config to $console_config"
 	;;
 esac
-chown -h system.system /sys/devices/system/cpu/cpufreq/policy0/walt/target_loads
-chown -h system.system /sys/devices/system/cpu/cpufreq/policy4/walt/target_loads
-chown -h system.system /sys/devices/system/cpu/cpufreq/policy7/walt/target_loads
+
 setprop vendor.post_boot.parsed 1
